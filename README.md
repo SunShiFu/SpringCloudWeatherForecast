@@ -19,3 +19,5 @@
 4. weather-data-eureka
 5. weather-report-eureka-feign-gateway-hystrix
 6. weather-eureka-client-zuul
+
+![运行截图](https://github.com/SunShiFu/SpringCloudWeatherForecast/blob/master/TIM%E6%88%AA%E5%9B%BE20190612132816.png)
