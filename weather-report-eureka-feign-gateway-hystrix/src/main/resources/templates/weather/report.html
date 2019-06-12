@@ -1,0 +1,147 @@
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>SpringCloud天气预报系统</title>
+<!-- for-mobile-apps -->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords"
+	content="Tab Weather Widget Responsive, Login form web template, Sign up Web Templates, Flat Web Templates, Login signup Responsive web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+
+<!-- //for-mobile-apps -->
+<link href="//fonts.googleapis.com/css?family=Roboto+Slab:100,400,700"
+	rel="stylesheet">
+<link
+	href='//fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic'
+	rel='stylesheet' type='text/css'>
+<link href="css/style.css" th:href="@{/css/style.css}" rel="stylesheet"
+	type="text/css" media="all" />
+<script src="/js/jquery-2.1.4.min.js"
+	th:src="@{/js/jquery-2.1.4.min.js}"></script>
+<link rel="stylesheet" type="text/css" href="css/raccordion.css"
+	th:href="@{/css/raccordion.css}" />
+
+<!--下拉框样式-->
+<link rel="stylesheet" href="dist/css/bootstrap.min.css"
+	th:href="@{/dist/css/bootstrap.min.css}">
+<link rel="stylesheet" href="dist/css/bootstrap-select.min.css"
+	th:href="@{/dist/css/bootstrap-select.min.css}">
+<!--<script src="dist/js/jquery.min.js" th:src="@{/dist/js/jquery.min.js}"></script>-->
+<script src="dist/js/bootstrap.min.js"
+	th:src="@{/dist/js/bootstrap.min.js}"></script>
+<script src="dist/js/bootstrap-select.min.js"
+	th:src="@{/dist/js/bootstrap-select.min.js}"></script>
+
+<script type="text/javascript">
+	$(window).load(function() {
+		$('#accordion-wrapper').raccordion({
+			speed : 1000,
+			sliderWidth : 700,
+			sliderHeight : 300,
+			autoCollapse : false
+		});
+
+	});
+</script>
+
+<!--skycons-icons-->
+<script src="js/skycons.js" th:src="@{/js/skycons.js}"></script>
+<!--//skycons-icons-->
+</head>
+<body>
+	<div class="content" id="Main-Content">
+		<div>
+			<h1 th:text="${reportModel.title}">SpringCloud天气预报系统</h1>
+		</div>
+		<div th:if="${reportModel.report} != null">
+			<div class="city">
+				<span th:text="${reportModel.report.city}">杭州</span> <select
+					class="selectpicker" data-style="btn-info" data-live-search="true"
+					id="selectCityId">
+					<option th:each="city : ${reportModel.cityList}"
+						th:value="${city.cityId}" th:text="${city.cityName}"
+						th:selected="${city.cityId eq reportModel.cityId}"></option>
+				</select>
+			</div>
+			<div class="temperature">
+				<span th:text="${reportModel.report.wendu}"></span>℃
+			</div>
+			<div class="remind">
+				<span th:text="${reportModel.report.ganmao}"></span>
+			</div>
+
+			<div class="wrapper">
+				<div id="accordion-wrapper">
+					<div class="slide"
+						th:each="forecast : ${reportModel.report.forecast}">
+						<img src="/images/小雨.jpg"
+							th:src="@{'/images/'+${forecast.type}+'.jpg'}" />
+						<div class="caption">
+							<div class="w3layouts-info">
+								<div class="w3layouts-info-top">
+									<h4 th:text="${forecast.high}">17°c</h4>
+									<br>
+									<h4 th:text="${forecast.low}">Rainy</h4>
+									<!--<canvas id="rain" width="40" height="40"></canvas>-->
+									<p th:text="${forecast.type}">San Francisco</p>
+								</div>
+
+								<div class="w3layouts-info-bottom">
+									<h5 th:text="${forecast.date}">December 1 , 2016</h5>
+									<p th:text="${forecast.fengxiang}">Thursday</p>
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+				</div>
+			</div>
+		</div>
+		<div th:if="${reportModel.report} == null">
+			<div class="city">
+				<p>天气数据 API服务异常！</p>
+			</div>
+		</div>
+		<!--copyright-->
+		<div class="w3ls-copyright">
+			<p style="color: white">© 2019 Design by SSF</p>
+		</div>
+		<!--//copyright-->
+	</div>
+	<script>
+		var icons = new Skycons({
+			"color" : "#FFD700"
+		}), list = [ "clear-day" ], i;
+
+		for (i = list.length; i--;)
+			icons.set(list[i], list[i]);
+
+		icons.play();
+	</script>
+	<script>
+		var icons = new Skycons({
+			"color" : "#f5f5f5"
+		}), list = [ "clear-night", "partly-cloudy-day", "partly-cloudy-night",
+				"cloudy", "rain", "sleet", "snow", "wind", "fog" ], i;
+
+		for (i = list.length; i--;)
+			icons.set(list[i], list[i]);
+
+		icons.play();
+	</script>
+
+	<script src="js/jquery.raccordion.js"
+		th:src="@{/js/jquery.raccordion.js}" type="text/javascript"></script>
+	<script src="js/jquery.animation.easing.js"
+		th:src="@{/js/jquery.animation.easing.js}" type="text/javascript"></script>
+</body>
+</html>
